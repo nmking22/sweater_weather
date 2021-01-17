@@ -10,7 +10,7 @@ class HourWeather
 
   def initialize(data)
     @time = convert_utc_time(data[:dt])
-    @temperature = data[:temp].round(1)
+    @temperature = data[:temp].round(1).to_f
     @wind_speed = "#{data[:wind_speed].round} mph"
     @wind_direction = convert_degrees(data[:wind_deg])
     @conditions = data[:weather][0][:description]

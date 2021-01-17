@@ -30,15 +30,12 @@ describe 'forecast request' do
       expect(json[:data][:attributes][:current_weather][:temperature]).to be_a(Float)
       expect(json[:data][:attributes][:current_weather]).to have_key(:feels_like)
       expect(json[:data][:attributes][:current_weather][:feels_like]).to be_a(Float)
-
-      # these three can be ints or floats
       expect(json[:data][:attributes][:current_weather]).to have_key(:humidity)
-      expect(json[:data][:attributes][:current_weather][:humidity]).to be_a(Integer)
+      expect(json[:data][:attributes][:current_weather][:humidity]).to be_a(Numeric)
       expect(json[:data][:attributes][:current_weather]).to have_key(:uvi)
-      expect(json[:data][:attributes][:current_weather][:uvi]).to be_a(Integer)
+      expect(json[:data][:attributes][:current_weather][:uvi]).to be_a(Numeric)
       expect(json[:data][:attributes][:current_weather]).to have_key(:visibility)
-      expect(json[:data][:attributes][:current_weather][:visibility]).to be_a(Integer)
-
+      expect(json[:data][:attributes][:current_weather][:visibility]).to be_a(Numeric)
       expect(json[:data][:attributes][:current_weather]).to have_key(:conditions)
       expect(json[:data][:attributes][:current_weather][:conditions]).to be_a(String)
       expect(json[:data][:attributes][:current_weather]).to have_key(:icon)
