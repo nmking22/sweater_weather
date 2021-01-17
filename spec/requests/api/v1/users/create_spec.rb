@@ -10,25 +10,27 @@ describe 'users create request' do
 
     post '/api/v1/users', params: payload
 
-    user = User.where(email: payload[:email])
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    user = User.where(email: payload[:email])[0]
 
     expect(response).to be_successful
-    expect(response).to be_a(Hash)
-    expect(response).to have_key(:data)
-    expect(response[:data]).to be_a(Hash)
-    expect(response[:data]).to have_key(:type)
-    expect(response[:data][:type]).to be_a(String)
-    expect(response[:data][:type]).to eq('users')
-    expect(response[:data]).to have_key(:id)
-    expect(response[:data][:id]).to be_a(String)
-    expect(response[:data][:id]).to eq(user.id.to_s)
-    expect(response[:data]).to have_key(:attributes)
-    expect(response[:data][:attributes]).to be_a(Hash)
-    expect(response[:data][:attributes]).to have_key('email')
-    expect(response[:data][:attributes][:email]).to be_a(String)
-    expect(response[:data][:attributes][:email]).to eq(user.email)
-    expect(response[:data][:attributes]).to have_key('api_key')
-    expect(response[:data][:attributes][:api_key]).to be_a(String)
-    expect(response[:data][:attributes][:api_key]).to eq(user.api_key)
+    expect(json).to be_a(Hash)
+    expect(json).to have_key(:data)
+    expect(json[:data]).to be_a(Hash)
+    expect(json[:data]).to have_key(:type)
+    expect(json[:data][:type]).to be_a(String)
+    expect(json[:data][:type]).to eq('users')
+    expect(json[:data]).to have_key(:id)
+    expect(json[:data][:id]).to be_a(String)
+    expect(json[:data][:id]).to eq(user.id.to_s)
+    expect(json[:data]).to have_key(:attributes)
+    expect(json[:data][:attributes]).to be_a(Hash)
+    expect(json[:data][:attributes]).to have_key(:email)
+    expect(json[:data][:attributes][:email]).to be_a(String)
+    expect(json[:data][:attributes][:email]).to eq(user.email)
+    expect(json[:data][:attributes]).to have_key(:api_key)
+    expect(json[:data][:attributes][:api_key]).to be_a(String)
+    expect(json[:data][:attributes][:api_key]).to eq(user.api_key)
   end
 end
