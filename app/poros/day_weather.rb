@@ -15,8 +15,8 @@ class DayWeather
     @date = convert_utc_date(data[:dt])
     @sunrise = convert_utc(data[:sunrise])
     @sunset = convert_utc(data[:sunset])
-    @max_temp = data[:temp][:max].round(1)
-    @min_temp = data[:temp][:min].round(1)
+    @max_temp = data[:temp][:max].round(1).to_f
+    @min_temp = data[:temp][:min].round(1).to_f
     @conditions = data[:weather][0][:description]
     @icon = data[:weather][0][:icon]
   end

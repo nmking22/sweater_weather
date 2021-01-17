@@ -19,8 +19,8 @@ class CurrentWeather
     @datetime = convert_utc(data[:dt])
     @sunrise = convert_utc(data[:sunrise])
     @sunset = convert_utc(data[:sunset])
-    @temperature = data[:temp].round(1)
-    @feels_like = data[:feels_like].round(1)
+    @temperature = data[:temp].round(1).to_f
+    @feels_like = data[:feels_like].round(1).to_f
     @humidity = data[:humidity]
     @uvi = data[:uvi]
     @visibility = data[:visibility]
