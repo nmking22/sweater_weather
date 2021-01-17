@@ -27,10 +27,3 @@ class HourWeather
     "from #{directions[direction_index]}"
   end
 end
-
-# time, in a human-readable format such as “14:00:00”
-# temperature, floating point number indicating the current temperature in Fahrenheit
-# wind_speed, string, in miles per hour
-# wind_direction, string, check wikipedia for how to convert this numeric value
-# conditions, the first ‘description’ field from the weather data as given by OpenWeather
-# icon, string, as given by OpenWeather
