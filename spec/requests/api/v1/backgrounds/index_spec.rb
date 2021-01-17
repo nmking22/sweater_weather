@@ -28,28 +28,5 @@ describe 'forecast request' do
     expect(json[:data][:attributes][:image][:credit][:source]).to be_a(String)
     expect(json[:data][:attributes][:image][:credit]).to have_key(:author)
     expect(json[:data][:attributes][:image][:credit][:author]).to be_a(String)
-    expect(json[:data][:attributes][:image][:credit]).to have_key(:logo)
-    expect(json[:data][:attributes][:image][:credit][:logo]).to be_a(String)
   end
 end
-
-
-# body:
-#
-# {
-#   "data": {
-#     "type": "image",
-#     "id": null,
-#     "attributes": {
-#       "image": {
-#         "location": "denver,co",
-#         "image_url": "https://pixabay.com/get/54e6d4444f50a814f1dc8460962930761c38d6ed534c704c7c2878dd954dc451_640.jpg",
-#         "credit": {
-#           "source": "pixabay.com",
-#           "author": "quinntheislander",
-#           "logo": "https://pixabay.com/static/img/logo_square.png"
-#         }
-#       }
-#     }
-#   }
-# }
