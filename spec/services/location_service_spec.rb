@@ -19,5 +19,21 @@ describe 'location service' do
       expect(data[:results][0][:locations][0][:latLng]).to have_key(:lng)
       expect(data[:results][0][:locations][0][:latLng][:lng]).to be_a(Float)
     end
+
+    it 'find_trip_data' do
+      params = {
+        origin: "Denver,CO",
+        destination: "Pueblo,CO",
+        api_key: "abc123"
+      }
+
+      trip_data = LocationService.find_trip_data(params)
+
+      expect(trip_data).to be_a(Hash)
+      expect(trip_data).to have_key(:route)
+      expect(trip_data[:route]).to be_a(Hash)
+      expect(trip_data[:route]).to have_key(:realTime)
+      expect(trip_data[:route][:realTime]).to be_an(Integer)
+    end
   end
 end
