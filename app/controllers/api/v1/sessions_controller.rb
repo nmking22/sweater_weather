@@ -5,7 +5,9 @@ class Api::V1::SessionsController < ApplicationController
       output = UsersSerializer.new(user)
       render json: output
     else
-      # return 400
+      output = Hash.new
+      output[:error] = 'Bad Credentials'
+      render json: output, :status => 400
     end
   end
 

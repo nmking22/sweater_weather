@@ -39,4 +39,30 @@ describe 'sessions create request' do
     expect(json[:data][:attributes][:api_key]).to be_a(String)
     expect(json[:data][:attributes][:api_key]).to eq(user.api_key)
   end
+
+  it 'a request with bad credentials returns a 400 status and error message' do
+    user = User.create!(
+      email: 'whatever@example.com',
+      password: 'password',
+      password_confirmation: 'password',
+      api_key: 'abc123'
+    )
+
+    payload = {
+      "email": "whatever@example.com",
+      "password": "pa$$word"
+    }
+
+    post '/api/v1/sessions', params: payload
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json).to have_key(:error)
+    expect(json[:error]).to be_a(String)
+    expect(json[:error]).to eq('Bad Credentials')
+  end
 end
