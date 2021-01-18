@@ -2,13 +2,14 @@ require 'rails_helper'
 
 describe 'weather facade' do
   describe 'class methods' do
-    it 'find_weather' do
-      coordinates = {
+    before :each do
+      @coordinates = {
         :lat=>29.950621,
         :lng=>-90.074948
       }
-
-      data = WeatherFacade.find_weather(coordinates)
+    end
+    it 'find_weather' do
+      data = WeatherFacade.find_weather(@coordinates)
 
       expect(data).to be_a(Hash)
       expect(data).to have_key(:current_weather)
@@ -26,6 +27,14 @@ describe 'weather facade' do
       data[:hourly_weather].each do |hour_weather|
         expect(hour_weather).to be_an(HourWeather)
       end
+    end
+
+    it 'find_weather_at_eta' do
+      weather = WeatherFacade.find_weather_at_eta(@coordinates, 260000)
+
+      expect(weather).to be_a(WeatherAtEta)
+      expect(weather.conditions).to be_a(String)
+      expect(weather.temperature).to be_a(Float)
     end
   end
 end

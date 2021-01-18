@@ -13,4 +13,9 @@ class WeatherFacade
     end
     weather_hash
   end
+
+  def self.find_weather_at_eta(coordinates, time)
+    weather_data = WeatherService.find_weather_data(coordinates)
+    WeatherAtEta.new(weather_data, time)
+  end
 end
