@@ -52,4 +52,17 @@ describe 'muchies request' do
     expect(json[:data][:attributes][:restaurant][:address]).to be_a(String)
 
   end
+
+  it 'impossible trip sad path' do
+    get '/api/v1/munchies?start=denver,co&end=london,uk&food=chinese'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to_not be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json).to have_key(:error)
+    expect(json[:error]).to eq('Queried trip is not possible.')
+  end
 end

@@ -1,9 +1,16 @@
 class Api::V1::MunchiesController < ApplicationController
   def index
-    munchie = Munchie.new(trip_and_time[:trip], restaurant)
-    output = MunchieSerializer.new(munchie)
-    
-    render json: output
+    if restaurant == 'impossible'
+      output = Hash.new
+      output[:error] = 'Queried trip is not possible.'
+      
+      render json: output, :status => 400
+    else
+      munchie = Munchie.new(trip_and_time[:trip], restaurant)
+      output = MunchieSerializer.new(munchie)
+
+      render json: output
+    end
   end
 
   def trip_and_time
@@ -15,11 +22,15 @@ class Api::V1::MunchiesController < ApplicationController
   end
 
   def restaurant
-    restaurant_query = {
-      trip_and_time: trip_and_time,
-      food: munchies_params[:food]
-    }
-    RestaurantFacade.find_restaurant(restaurant_query)
+    if trip_and_time[:time] == 'impossible'
+      return 'impossible'
+    else
+      restaurant_query = {
+        trip_and_time: trip_and_time,
+        food: munchies_params[:food]
+      }
+      RestaurantFacade.find_restaurant(restaurant_query)
+    end
   end
 
   private
