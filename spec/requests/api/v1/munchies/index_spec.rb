@@ -16,10 +16,10 @@ describe 'muchies request' do
     restaurant_keys = [:name, :address]
 
     expect(json.keys).to eq([:data])
-    expect(json[[:data]].keys).to eq(data_keys)
-    expect(json[[:data][:attributes]].keys).to eq(attribute_keys)
-    expect(json[[:data][:forecast]].keys).to eq(forecast_keys)
-    expect(json[[:data][:restaurant]].keys).to eq(restaurant_keys)
+    expect(json[:data].keys).to eq(data_keys)
+    expect(json[:data][:attributes].keys).to eq(attribute_keys)
+    expect(json[:data][:attributes][:forecast].keys).to eq(forecast_keys)
+    expect(json[:data][:attributes][:restaurant].keys).to eq(restaurant_keys)
 
     # tests data types/known values of hash values
     expect(json).to be_a(Hash)
