@@ -2,6 +2,13 @@ require 'rails_helper'
 
 describe 'road trip create request' do
   it "returns road trip info for the payload" do
+    User.create!(
+      email: 'whatever@example.com',
+      password: 'password',
+      password_confirmation: 'password',
+      api_key: 'jgn983hy48thw9begh98h4539h4'
+    )
+
     payload = {
       "origin": "Denver,CO",
       "destination": "Pueblo,CO",
@@ -37,5 +44,25 @@ describe 'road trip create request' do
     expect(json[:data][:attributes][:weather_at_eta][:temperature]).to be_a(Float)
     expect(json[:data][:attributes][:weather_at_eta]).to have_key(:conditions)
     expect(json[:data][:attributes][:weather_at_eta][:conditions]).to be_a(String)
+  end
+
+  it 'returns 401 error if api key is invalid' do
+    payload = {
+      "origin": "Denver,CO",
+      "destination": "Pueblo,CO",
+      "api_key": "badkey"
+    }
+
+    post '/api/v1/road_trip', params: payload
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(401)
+
+    expect(json).to be_a(Hash)
+    expect(json.keys).to eq([:error])
+    expect(json[:error]).to be_a(String)
+    expect(json[:error]).to eq('Invalid API key.')
   end
 end
