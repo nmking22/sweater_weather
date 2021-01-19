@@ -99,12 +99,62 @@ describe 'road trip create request' do
     expect(json[:error]).to eq('API key is required.')
   end
 
-  xit 'origin key' do
+  it 'returns 400 error if origin is not included in body of request' do
+    User.create!(
+      email: 'whatever@example.com',
+      password: 'password',
+      password_confirmation: 'password',
+      api_key: 'jgn983hy48thw9begh98h4539h4'
+    )
 
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
+    }
+    payload = {
+      "destination": "Pueblo,CO",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+    post '/api/v1/road_trip', headers: headers, params: JSON.generate(payload)
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json.keys).to eq([:error])
+    expect(json[:error]).to be_a(String)
+    expect(json[:error]).to eq('Origin is required.')
   end
 
-  xit 'destination key' do
+  it 'returns 400 error if destination is not included in body of request' do
+    User.create!(
+      email: 'whatever@example.com',
+      password: 'password',
+      password_confirmation: 'password',
+      api_key: 'jgn983hy48thw9begh98h4539h4'
+    )
 
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
+    }
+    payload = {
+      "origin": "Denver,CO",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+    post '/api/v1/road_trip', headers: headers, params: JSON.generate(payload)
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json.keys).to eq([:error])
+    expect(json[:error]).to be_a(String)
+    expect(json[:error]).to eq('Destination is required.')
   end
 
   it "response for impossible road trips has empty weather block and 'impossible' travel_time" do
