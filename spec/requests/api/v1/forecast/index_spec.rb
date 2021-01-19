@@ -121,4 +121,49 @@ describe 'forecast request' do
       expect(json[:data][:attributes][:hourly_weather][0]).to have_key(:icon)
       expect(json[:data][:attributes][:hourly_weather][0][:icon]).to be_a(String)
   end
+
+  it 'request with no location parameter returns error' do
+    get '/api/v1/forecast'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json.keys).to eq([:error])
+    expect(json[:error]).to eq('Location parameter is required.')
+  end
+
+  it 'returns successful response for international locations' do
+    get '/api/v1/forecast?location=london,uk'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    get '/api/v1/forecast?location=toronto canada'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    get '/api/v1/forecast?location=frankfurt,de'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+  end
+
+  it 'returns successful response with full addresses and spaces' do
+    get '/api/v1/forecast?location=Moscow, Russia, 103132'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+  end
 end
