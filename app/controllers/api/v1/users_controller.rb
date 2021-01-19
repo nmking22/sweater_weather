@@ -2,7 +2,7 @@ require 'securerandom'
 
 class Api::V1::UsersController < ApplicationController
   def create
-    user = create_user
+    user = new_user
 
     if user.save
       output = UsersSerializer.new(user)
@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  def create_user
+  def new_user
     loop do
       @api_key = SecureRandom.base64
       break if User.where(api_key: @api_key) == []
