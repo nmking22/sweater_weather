@@ -40,4 +40,17 @@ describe 'forecast request' do
     expect(json[:data][:attributes][:image][:credit]).to have_key(:author)
     expect(json[:data][:attributes][:image][:credit][:author]).to be_a(String)
   end
+
+  it 'request with no location parameter returns error' do
+    get '/api/v1/backgrounds'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json.keys).to eq([:error])
+    expect(json[:error]).to eq('Location parameter is required.')
+  end
 end
