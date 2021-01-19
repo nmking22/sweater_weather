@@ -9,12 +9,15 @@ describe 'sessions create request' do
       api_key: 'abc123'
     )
 
-    payload = {
-      "email": "whatever@example.com",
-      "password": "password"
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
     }
-
-    post '/api/v1/sessions', params: payload
+    payload = {
+      'email': 'whatever@example.com',
+      'password': 'password'
+    }
+    post '/api/v1/sessions', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -48,12 +51,15 @@ describe 'sessions create request' do
       api_key: 'abc123'
     )
 
-    payload = {
-      "email": "whatever@example.com",
-      "password": "pa$$word"
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
     }
-
-    post '/api/v1/sessions', params: payload
+    payload = {
+      'email': 'whatever@example.com',
+      'password': 'pa$$word'
+    }
+    post '/api/v1/sessions', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
