@@ -8,6 +8,13 @@ describe 'users create request' do
       "password_confirmation": "password"
     }
 
+    # headers = {
+    #   'Content_Type' => 'application/json',
+    #   'Accept' =>    'application/json'
+    # }
+    #
+    # post '/api/v1/users', headers: headers, params: JSON.generate(payload)
+
     post '/api/v1/users', params: payload
 
     json = JSON.parse(response.body, symbolize_names: true)
@@ -120,7 +127,7 @@ describe 'users create request' do
     expect(json[:error]).to eq("Password can't be blank")
   end
 
-  xit 'returns 400 error with descriptive body if password_confirmation field is missing' do
+  it 'returns 400 error with descriptive body if password_confirmation field is missing' do
     payload = {
       "email": "whatever@example.com",
       "password": "password"
@@ -135,6 +142,6 @@ describe 'users create request' do
 
     expect(json).to be_a(Hash)
     expect(json).to have_key(:error)
-    expect(json[:error]).to eq("Password can't be blank")
+    expect(json[:error]).to eq("Password confirmation can't be blank")
   end
 end
