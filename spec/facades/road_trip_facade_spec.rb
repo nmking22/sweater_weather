@@ -31,5 +31,22 @@ describe 'road trip facade' do
       expect(trip_and_time[:trip]).to be_a(RoadTrip)
       expect(trip_and_time[:time]).to be_an(Integer)
     end
+
+    it 'find_trip_and_time sad path' do
+      params = {
+        origin: "Denver,CO",
+        destination: "London,UK"
+      }
+
+      trip_and_time = RoadTripFacade.find_trip_and_time(params)
+
+      expect(trip_and_time).to be_a(Hash)
+      expect(trip_and_time.keys).to eq([:trip, :time])
+      expect(trip_and_time[:trip]).to be_a(RoadTrip)
+      expect(trip_and_time[:trip].travel_time).to eq('impossible')
+      expect(trip_and_time[:trip].weather_at_eta).to eq(nil)
+      expect(trip_and_time[:time]).to be_a(String)
+      expect(trip_and_time[:time]).to eq('impossible')
+    end
   end
 end
