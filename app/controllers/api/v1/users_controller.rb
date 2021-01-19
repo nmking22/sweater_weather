@@ -2,12 +2,7 @@ require 'securerandom'
 
 class Api::V1::UsersController < ApplicationController
   def create
-    # user creation
-    loop do
-      @api_key = SecureRandom.base64
-      break if User.where(api_key: @api_key) == []
-    end
-    user = User.new(user_params.merge({api_key: @api_key}))
+    user = new_user
 
     if user.save
       output = UsersSerializer.new(user)
@@ -17,6 +12,14 @@ class Api::V1::UsersController < ApplicationController
       output[:error] = user.errors.full_messages[0]
       render json: output, :status => 400
     end
+  end
+
+  def new_user
+    loop do
+      @api_key = SecureRandom.base64
+      break if User.where(api_key: @api_key) == []
+    end
+    User.new(user_params.merge({api_key: @api_key}))
   end
 
   private

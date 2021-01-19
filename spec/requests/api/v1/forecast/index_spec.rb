@@ -6,6 +6,50 @@ describe 'forecast request' do
 
       json = JSON.parse(response.body, symbolize_names: true)
 
+      # tests for only intended keys
+      data_keys = [:id, :type, :attributes]
+      attribute_keys = [:current_weather, :daily_weather, :hourly_weather]
+      current_weather_keys = [
+        :datetime,
+        :sunrise,
+        :sunset,
+        :temperature,
+        :feels_like,
+        :humidity,
+        :uvi,
+        :visibility,
+        :conditions,
+        :icon
+      ]
+      daily_weather_keys = [
+        :date,
+        :sunrise,
+        :sunset,
+        :max_temp,
+        :min_temp,
+        :conditions,
+        :icon
+      ]
+      hourly_weather_keys = [
+        :time,
+        :temperature,
+        :wind_speed,
+        :wind_direction,
+        :conditions,
+        :icon
+      ]
+      expect(json.keys).to eq([:data])
+      expect(json[:data].keys).to eq(data_keys)
+      expect(json[:data][:attributes].keys).to eq(attribute_keys)
+      expect(json[:data][:attributes][:current_weather].keys).to eq(current_weather_keys)
+      json[:data][:attributes][:daily_weather].each do |day_weather|
+        expect(day_weather.keys).to eq(daily_weather_keys)
+      end
+      json[:data][:attributes][:hourly_weather].each do |hour_weather|
+        expect(hour_weather.keys).to eq(hourly_weather_keys)
+      end
+
+      # tests for data types/known values
       expect(json).to be_a(Hash)
       expect(json).to have_key(:data)
       expect(json[:data]).to be_a(Hash)
@@ -13,12 +57,11 @@ describe 'forecast request' do
       expect(json[:data][:id]).to eq('null')
       expect(json[:data]).to have_key(:type)
       expect(json[:data][:type]).to eq('forecast')
-
       expect(json[:data]).to have_key(:attributes)
       expect(json[:data][:attributes]).to be_a(Hash)
-      expect(json[:data][:attributes]).to have_key(:current_weather)
 
       # current weather
+      expect(json[:data][:attributes]).to have_key(:current_weather)
       expect(json[:data][:attributes][:current_weather]).to be_a(Hash)
       expect(json[:data][:attributes][:current_weather]).to have_key(:datetime)
       expect(json[:data][:attributes][:current_weather][:datetime]).to be_a(String)
@@ -77,5 +120,50 @@ describe 'forecast request' do
       expect(json[:data][:attributes][:hourly_weather][0][:conditions]).to be_a(String)
       expect(json[:data][:attributes][:hourly_weather][0]).to have_key(:icon)
       expect(json[:data][:attributes][:hourly_weather][0][:icon]).to be_a(String)
+  end
+
+  it 'request with no location parameter returns error' do
+    get '/api/v1/forecast'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json.keys).to eq([:error])
+    expect(json[:error]).to eq('Location parameter is required.')
+  end
+
+  it 'returns successful response for international locations' do
+    get '/api/v1/forecast?location=london,uk'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    get '/api/v1/forecast?location=toronto canada'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+
+    get '/api/v1/forecast?location=frankfurt,de'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
+  end
+
+  it 'returns successful response with full addresses and spaces' do
+    get '/api/v1/forecast?location=Moscow, Russia, 103132'
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(response.status).to eq(200)
   end
 end
