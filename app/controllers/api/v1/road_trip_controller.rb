@@ -5,10 +5,14 @@ class Api::V1::RoadTripController < ApplicationController
       output = RoadtripSerializer.new(road_trip)
 
       render json: output
-    else
+    elsif road_trip_params[:api_key]
       output = Hash.new
       output[:error] = 'Invalid API key.'
       render json: output, :status => 401
+    else
+      output = Hash.new
+      output[:error] = 'API key is required.'
+      render json: output, :status => 400
     end
   end
 

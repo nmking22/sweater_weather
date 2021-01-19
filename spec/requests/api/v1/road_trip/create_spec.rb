@@ -65,4 +65,23 @@ describe 'road trip create request' do
     expect(json[:error]).to be_a(String)
     expect(json[:error]).to eq('Invalid API key.')
   end
+
+  it 'returns 400 error if api key is not included in body of request' do
+    payload = {
+      "origin": "Denver,CO",
+      "destination": "Pueblo,CO",
+    }
+
+    post '/api/v1/road_trip', params: payload
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json.keys).to eq([:error])
+    expect(json[:error]).to be_a(String)
+    expect(json[:error]).to eq('API key is required.')
+  end
 end
