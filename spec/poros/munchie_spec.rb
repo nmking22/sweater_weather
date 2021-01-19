@@ -43,6 +43,7 @@ describe 'munchie' do
     @restaurant = Restaurant.new(restaurant_data)
 
   end
+
   it 'has readable attributes' do
     munchie = Munchie.new(@trip, @restaurant)
 
@@ -56,5 +57,18 @@ describe 'munchie' do
     expect(munchie.travel_time).to eq('3 day(s), 0 hour(s), 13 minute(s)')
     expect(munchie.forecast).to eq(expected_forecast)
     expect(munchie.restaurant).to eq(@restaurant)
+  end
+
+  describe 'instance methods' do
+    it 'hash_forecast' do
+      munchie = Munchie.new(@trip, @restaurant)
+
+      expected_forecast = {
+        :summary=>"broken clouds",
+        :temperature=>"69"
+      }
+
+      expect(munchie.hash_forecast(@weather)).to eq(expected_forecast)
+    end
   end
 end
