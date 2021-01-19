@@ -2,20 +2,16 @@ require 'rails_helper'
 
 describe 'users create request' do
   it 'creates a user and returns an api key' do
-    payload = {
-      "email": "whatever@example.com",
-      "password": "password",
-      "password_confirmation": "password"
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
     }
-
-    # headers = {
-    #   'Content_Type' => 'application/json',
-    #   'Accept' =>    'application/json'
-    # }
-    #
-    # post '/api/v1/users', headers: headers, params: JSON.generate(payload)
-
-    post '/api/v1/users', params: payload
+    payload = {
+      'email': 'whatever@example.com',
+      'password': 'password',
+      'password_confirmation': 'password'
+    }
+    post '/api/v1/users', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -54,13 +50,16 @@ describe 'users create request' do
       api_key: 'abc123'
     )
 
-    payload = {
-      "email": "whatever@example.com",
-      "password": "password",
-      "password_confirmation": "password"
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
     }
-
-    post '/api/v1/users', params: payload
+    payload = {
+      'email': 'whatever@example.com',
+      'password': 'password',
+      'password_confirmation': 'password'
+    }
+    post '/api/v1/users', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -73,13 +72,16 @@ describe 'users create request' do
   end
 
   it 'returns 400 error with descriptive body if password and confirmation do not match' do
-    payload = {
-      "email": "whatever@example.com",
-      "password": "password",
-      "password_confirmation": "pa$$word"
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
     }
-
-    post '/api/v1/users', params: payload
+    payload = {
+      'email': 'whatever@example.com',
+      'password': 'password',
+      'password_confirmation': 'pa$$word'
+    }
+    post '/api/v1/users', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -92,12 +94,15 @@ describe 'users create request' do
   end
 
   it 'returns 400 error with descriptive body if email field is missing' do
-    payload = {
-      "password": "password",
-      "password_confirmation": "password"
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
     }
-
-    post '/api/v1/users', params: payload
+    payload = {
+      'password': 'password',
+      'password_confirmation': 'password'
+    }
+    post '/api/v1/users', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -110,12 +115,15 @@ describe 'users create request' do
   end
 
   it 'returns 400 error with descriptive body if password field is missing' do
-    payload = {
-      "email": "whatever@example.com",
-      "password_confirmation": "password"
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
     }
-
-    post '/api/v1/users', params: payload
+    payload = {
+      'email': 'whatever@example.com',
+      'password_confirmation': 'password'
+    }
+    post '/api/v1/users', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -128,12 +136,15 @@ describe 'users create request' do
   end
 
   it 'returns 400 error with descriptive body if password_confirmation field is missing' do
-    payload = {
-      "email": "whatever@example.com",
-      "password": "password"
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
     }
-
-    post '/api/v1/users', params: payload
+    payload = {
+      'email': 'whatever@example.com',
+      'password': 'password'
+    }
+    post '/api/v1/users', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 

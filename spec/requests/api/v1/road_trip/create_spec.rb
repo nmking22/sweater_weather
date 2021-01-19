@@ -9,13 +9,16 @@ describe 'road trip create request' do
       api_key: 'jgn983hy48thw9begh98h4539h4'
     )
 
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
+    }
     payload = {
       "origin": "Denver,CO",
       "destination": "Pueblo,CO",
       "api_key": "jgn983hy48thw9begh98h4539h4"
     }
-
-    post '/api/v1/road_trip', params: payload
+    post '/api/v1/road_trip', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -52,13 +55,16 @@ describe 'road trip create request' do
   end
 
   it 'returns 401 error if api key is invalid' do
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
+    }
     payload = {
       "origin": "Denver,CO",
       "destination": "Pueblo,CO",
-      "api_key": "badkey"
+      "api_key": "bad key"
     }
-
-    post '/api/v1/road_trip', params: payload
+    post '/api/v1/road_trip', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -72,12 +78,15 @@ describe 'road trip create request' do
   end
 
   it 'returns 400 error if api key is not included in body of request' do
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
+    }
     payload = {
       "origin": "Denver,CO",
       "destination": "Pueblo,CO"
     }
-
-    post '/api/v1/road_trip', params: payload
+    post '/api/v1/road_trip', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
@@ -106,13 +115,16 @@ describe 'road trip create request' do
       api_key: 'jgn983hy48thw9begh98h4539h4'
     )
 
+    headers = {
+      'CONTENT-TYPE' => 'application/json',
+      'ACCEPT' => 'application/json'
+    }
     payload = {
       "origin": "NewYork,NY",
       "destination": "London,UK",
       "api_key": "jgn983hy48thw9begh98h4539h4"
     }
-
-    post '/api/v1/road_trip', params: payload
+    post '/api/v1/road_trip', headers: headers, params: JSON.generate(payload)
 
     json = JSON.parse(response.body, symbolize_names: true)
 
