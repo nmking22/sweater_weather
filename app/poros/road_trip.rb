@@ -21,6 +21,7 @@ class RoadTrip
   end
 
   def convert_time(time)
+    return time if time == 'impossible'
     if time < 60
       "#{time} second(s)"
     elsif (time / 60) < 60

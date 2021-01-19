@@ -19,7 +19,7 @@ describe 'users create request' do
 
     json = JSON.parse(response.body, symbolize_names: true)
 
-    user = User.where(email: payload[:email])[0]
+    user = User.find_by(email: payload[:email])
 
     expect(response).to be_successful
     expect(response.status).to eq(201)
