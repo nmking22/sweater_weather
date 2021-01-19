@@ -1,9 +1,15 @@
 class Api::V1::RoadTripController < ApplicationController
   def create
-    road_trip = RoadTripFacade.find_road_trip(road_trip_params)
-    output = RoadtripSerializer.new(road_trip)
+    if User.find_by(api_key: road_trip_params[:api_key])
+      road_trip = RoadTripFacade.find_road_trip(road_trip_params)
+      output = RoadtripSerializer.new(road_trip)
 
-    render json: output
+      render json: output
+    else
+      output = Hash.new
+      output[:error] = 'Invalid API key.'
+      render json: output, :status => 401
+    end
   end
 
   private
