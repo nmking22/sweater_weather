@@ -5,12 +5,12 @@
 ![](https://img.shields.io/gem/v/fast_jsonapi)
 ![](https://img.shields.io/github/issues/sweater_weather)
 
-# GTFO-BE
+# Sweater Weather
 ![Sweater Weather](https://user-images.githubusercontent.com/68172332/105113035-619ea500-5a81-11eb-904a-64ecfa505229.png)
 
 ## Table of Contents
   - [What it does](#what-it-does)
-  - [How to Install GTFO-BE](#how-to-install-gtfo-be)
+  - [How to Install Sweater Weather](#how-to-install-sweater-weather)
   - [API Contract](#api-contract)
   - [Schema](#schema)
   - [Dependencies](#dependencies)
@@ -22,29 +22,28 @@
 
 ## What it does
 
-This project part of a Service-Oriented Architecture (SOA) application that provides users with flight and weather information based on search parameters that the user provides. The GTFO-BE serves as an intermediary from the GTFO-FE repo and the Weather-API and Flight-API repos. This service collects data from both the Weather and Flight APIs and compiles the data into one service that the front end can call.
+Sweater Weather simulates the workflow of a back-end developer in a full stack team using service-oriented architecture. The front-end team has provided API contracts for their needs, and Sweater Weather actualizes those contracts to create the API endpoints needed. Sweater Weather makes use of three external APIs: MapQuest, OpenWeather and Unsplash. The project processes these APIs and serializes the needed data into custom endpoints.
 
-To view the production site, please visit the [GTFO link](https://gtfo-fe.herokuapp.com/).
-
-To view the other components of the application please visit the [Github Project Organization](https://github.com/GetThatFlightOut).
-
-## How to Install GTFO-BE
+## How to Install Sweater Weather
 
 For usage on your local machine follow the instructions listed below:
 
 ```
-git clone git@github.com:GetThatFlightOut/GTFO-BE.git
-cd GTFO-BE
+git git@github.com:nmking22/sweater_weather.git
+cd sweater_weather
 bundle install
 rake db:{create,migrate}
 figaro install
   #setup ENV variables in application.yml
-    #FLIGHT_API_HOST: "https://flight-api-service.herokuapp.com/"
-    #WEATHER_API_HOST: "https://gtfo-weather-api.herokuapp.com/"
+    #MAPQUEST_KEY: <your_mapquest_key>
+    #WEATHER_KEY: <your_openweather_key>
+    #UNSPLASH_KEY: <your_unsplash_key>
 rails s
 get calls to: localhost:3000 in your web browser
 ```
-
+Mapquest API keys are available here
+OpenWeather API keys are available here
+Unsplash API keys are available here
 ## API Contract
 
 To see an example response like that below you can use [Postman](https://www.postman.com/) to send a GET request to our BE hosted on Heroku here: https://gtfo-be.herokuapp.com/api/v1/search
