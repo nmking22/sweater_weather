@@ -65,7 +65,7 @@ Accept: application/json
 ```
 {
   "data": {
-    "id": 'null',
+    "id": "null",
     "type": "forecast",
     "attributes": {
       "current_weather": {
@@ -116,15 +116,14 @@ body:
 {
   "data": {
     "type": "image",
-    "id": null,
+    "id": "null",
     "attributes": {
       "image": {
         "location": "denver,co",
-        "image_url": "https://pixabay.com/get/54e6d4444f50a814f1dc8460962930761c38d6ed534c704c7c2878dd954dc451_640.jpg",
+        "image_url": "https://images.unsplash.com/photo-1600041161228-519e6dd27bac?crop=entropy&cs=srgb&fm=jpg&ixid=MXwxOTkxNzd8MHwxfHNlYXJjaHwxfHxkZW52ZXIsY298ZW58MHx8fA&ixlib=rb-1.2.1&q=85",
         "credit": {
-          "source": "pixabay.com",
-          "author": "quinntheislander",
-          "logo": "https://pixabay.com/static/img/logo_square.png"
+          "source": "Unsplash",
+          "author": "Michael Kilcoyne",
         }
       }
     }
