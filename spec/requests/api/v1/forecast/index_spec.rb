@@ -135,6 +135,19 @@ describe 'forecast request' do
     expect(json[:error]).to eq('Location parameter is required.')
   end
 
+  it 'request with empty location parameter returns error' do
+    get '/api/v1/forecast?location='
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).not_to be_successful
+    expect(response.status).to eq(400)
+
+    expect(json).to be_a(Hash)
+    expect(json.keys).to eq([:error])
+    expect(json[:error]).to eq('Location parameter must not be blank.')
+  end
+
   it 'returns successful response for international locations' do
     get '/api/v1/forecast?location=london,uk'
 
