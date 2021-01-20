@@ -39,7 +39,7 @@ figaro install
     #WEATHER_KEY: <your_openweather_key>
     #UNSPLASH_KEY: <your_unsplash_key>
 rails s
-get/post calls to: localhost:3000 in your web browser
+get/post calls to: localhost:3000 in your web browser or with a tool like Postman
 ```
 Mapquest API keys are available [here](https://developer.mapquest.com/documentation/)
 
