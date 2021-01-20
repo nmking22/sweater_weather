@@ -49,6 +49,69 @@ Unsplash API keys are available [here](https://unsplash.com/documentation#creati
 
 ## API Contract
 
+### GET /api/v1/forecast?location=<location>
+  
+Returns current weather forecast, hourly forecast for the next 8 hours and daily forecast for the next 5 days at queried location
+
+#### Sample Request
+
+```
+GET /api/v1/forecast?location=denver,co
+Content-Type: application/json
+Accept: application/json
+```
+
+#### Sample Response
+
+```
+{
+  "data": {
+    "id": 'null',
+    "type": "forecast",
+    "attributes": {
+      "current_weather": {
+        "datetime": "2020-09-30 13:27:03 -0600",
+        "temperature": 79.4,
+        etc
+      },
+      "daily_weather": [
+        {
+          "date": "2020-10-01",
+          "sunrise": "2020-10-01 06:10:43 -0600",
+          etc
+        },
+        {...} etc
+      ],
+      "hourly_weather": [
+        {
+          "time": "14:00:00",
+          "wind_speed": "4 mph",
+          "wind_direction": "from NW",
+          etc
+        },
+        {...} etc
+      ]
+    }
+  }
+}
+```
+  
+### GET /api/v1/backgrounds?location=<location>
+  
+Returns a relevant image for the queried location
+  
+### POST /api/v1/users
+
+Creates a user in BE database and returns user's email and a unique API key
+
+### POST /api/v1/sessions
+
+Returns user's API key if email/password is valid
+
+### POST /api/v1/road_trip
+
+Returns travel time and weather at destination for queried trip
+
 To see an example response like that below you can use [Postman](https://www.postman.com/) to send a GET request to our BE hosted on Heroku here: https://gtfo-be.herokuapp.com/api/v1/search
 
 Required parameters:
