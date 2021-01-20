@@ -23,7 +23,7 @@ describe 'forecast request' do
     expect(json[:data]).to have_key(:type)
     expect(json[:data][:type]).to eq('image')
     expect(json[:data]).to have_key(:id)
-    expect(json[:data][:id]).to eq('null')
+    expect(json[:data][:id]).to eq(nil)
     expect(json[:data]).to have_key(:attributes)
     expect(json[:data][:attributes]).to be_a(Hash)
     expect(json[:data][:attributes]).to have_key(:image)
