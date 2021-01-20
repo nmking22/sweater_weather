@@ -73,14 +73,6 @@ This is an example of an error response for Invalid Data (Missing/Incorrect)
 }
 ```
 
-### Asynchronous API Calls
-
-Due to the sheer amount of data returned from the two APIs, our team decided to implement asynchronous threads with the Rails Executor. This operation allows GTFO to handle multiple HTTP requests simultaneously by running multiple threads, up to 20, to reduce response time by 50%.
-
- <p align="center">
- <img src="https://i.imgur.com/JuoqyFa.png">
- </p>
-
 ## Schema
 
  <p align="center">
@@ -93,9 +85,6 @@ Due to the sheer amount of data returned from the two APIs, our team decided to 
  * figaro
  * faraday
  * fast_jsonapi
- * travis
- * webmock
- * vcr
  * shoulda-matchers
  * simplecov
 
