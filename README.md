@@ -41,11 +41,11 @@ figaro install
 rails s
 get/post calls to: localhost:3000 in your web browser
 ```
-Mapquest API keys are available here
+Mapquest API keys are available [here](https://developer.mapquest.com/documentation/)
 
-OpenWeather API keys are available here
+OpenWeather API keys (One Call API) are available [here](https://openweathermap.org/api)
 
-Unsplash API keys are available here
+Unsplash API keys are available [here](https://unsplash.com/documentation#creating-a-developer-account)
 
 ## API Contract
 
