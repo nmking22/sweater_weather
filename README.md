@@ -39,11 +39,14 @@ figaro install
     #WEATHER_KEY: <your_openweather_key>
     #UNSPLASH_KEY: <your_unsplash_key>
 rails s
-get calls to: localhost:3000 in your web browser
+get/post calls to: localhost:3000 in your web browser
 ```
 Mapquest API keys are available here
+
 OpenWeather API keys are available here
+
 Unsplash API keys are available here
+
 ## API Contract
 
 To see an example response like that below you can use [Postman](https://www.postman.com/) to send a GET request to our BE hosted on Heroku here: https://gtfo-be.herokuapp.com/api/v1/search
