@@ -65,7 +65,7 @@ Accept: application/json
 ```
 {
   "data": {
-    "id": "null",
+    "id": null,
     "type": "forecast",
     "attributes": {
       "current_weather": {
@@ -116,7 +116,7 @@ body:
 {
   "data": {
     "type": "image",
-    "id": "null",
+    "id": null,
     "attributes": {
       "image": {
         "location": "denver,co",
