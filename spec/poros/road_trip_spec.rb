@@ -21,9 +21,10 @@ describe 'road trip' do
     it 'format_city' do
       city = 'denver,co'
       city_2 = 'dEnVeR,cO'
-      # city = 'new orleans,la'
+      city_3 = 'new orleans,la'
       expect(@road_trip.format_city(city)).to eq('Denver, CO')
       expect(@road_trip.format_city(city_2)).to eq('Denver, CO')
+      expect(@road_trip.format_city(city_3)).to eq('New Orleans, LA')
     end
 
     it 'convert_time' do

@@ -15,7 +15,15 @@ class RoadTrip
 
   def format_city(city)
     city_array = city.split(',')
-    city_array[0].capitalize!
+    if city_array[0].include?(' ')
+      city_name = city_array[0].split(' ')
+      city_name.each do |city_word|
+        city_word.capitalize!
+      end
+      city_array[0] = city_name.join(' ')
+    else
+      city_array[0].capitalize!
+    end
     city_array[1].upcase!
     city_array.join(', ')
   end
