@@ -11,6 +11,7 @@ describe 'weather at eta' do
     @time_3 = 5000
     @time_4 = 100000
     @time_5 = 10000
+    @time_6 = 10000000
 
     @weather = WeatherAtEta.new(@data, @time)
   end
@@ -27,6 +28,7 @@ describe 'weather at eta' do
       expect(@weather.find_temp(@data, @time_3)).to eq(60.7)
       expect(@weather.find_temp(@data, @time_4)).to eq(69.2)
       expect(@weather.find_temp(@data, @time_5)).to eq(60.9)
+      expect(@weather.find_temp(@data, @time_6)).to eq(61.5)
     end
 
     it 'find_conditions' do
@@ -35,6 +37,7 @@ describe 'weather at eta' do
       expect(@weather.find_conditions(@data, @time_3)).to eq('clear sky')
       expect(@weather.find_conditions(@data, @time_4)).to eq('few clouds')
       expect(@weather.find_conditions(@data, @time_5)).to eq('clear sky')
+      expect(@weather.find_conditions(@data, @time_6)).to eq('clear sky')
     end
 
     it 'find_time_key' do
@@ -43,6 +46,7 @@ describe 'weather at eta' do
       expect(@weather.find_time_key(@time_3)).to eq([:hourly, 1])
       expect(@weather.find_time_key(@time_4)).to eq([:hourly, 27])
       expect(@weather.find_time_key(@time_5)).to eq([:hourly, 2])
+      expect(@weather.find_time_key(@time_6)).to eq([:hourly, 0])
     end
   end
 end
