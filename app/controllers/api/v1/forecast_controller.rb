@@ -12,6 +12,5 @@ class Api::V1::ForecastController < ApplicationController
 
       render json: output, :status => 400
     end
-
   end
 end
