@@ -244,7 +244,7 @@ body:
 
 ## Schema
 
-Sweater Weather only uses one database table, users, to create and validate user information.
+Sweater Weather only uses one database table - users - to create and validate user information.
 
 <img width="472" alt="Screen Shot 2021-01-19 at 6 57 36 PM" src="https://user-images.githubusercontent.com/68172332/105116592-4a16ea80-5a88-11eb-9c42-64efec5e78f4.png">
 
@@ -277,7 +277,4 @@ Sweater Weather uses RSpec for testing, and SimpleCov for test coverage. Sweater
 
 ## Contact
 
-#### Nick King: [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/nick-king-3128501ba/), [Email](mailto:nickmaxking@gmail.com), [GitHub](https://github.com/nmking22)
-
-<!-- MARKDOWN LINKS -->
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555# README
+#### Nick King: [LinkedIn](https://www.linkedin.com/in/nick-king-3128501ba/), [Email](mailto:nickmaxking@gmail.com), [GitHub](https://github.com/nmking22)
