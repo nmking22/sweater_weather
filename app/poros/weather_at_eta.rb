@@ -26,5 +26,6 @@ class WeatherAtEta
     return [:hourly, hours] if hours <= 48
     days = hours / 24
     return [:daily, days] if days <= 8
+    return [:hourly, 0]
   end
 end
