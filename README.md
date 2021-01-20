@@ -49,7 +49,7 @@ Unsplash API keys are available [here](https://unsplash.com/documentation#creati
 
 ## API Contract
 
-### GET /api/v1/forecast?location=<location>
+### GET /api/v1/forecast?location={location}
   
 Returns current weather forecast, hourly forecast for the next 8 hours and daily forecast for the next 5 days at queried location
 
@@ -96,43 +96,150 @@ Accept: application/json
 }
 ```
   
-### GET /api/v1/backgrounds?location=<location>
+### GET /api/v1/backgrounds?location={location}
   
 Returns a relevant image for the queried location
+
+#### Sample Request
+
+```
+GET /api/v1/backgrounds?location=denver,co
+Content-Type: application/json
+Accept: application/json
+```
+
+#### Sample Response
+
+```
+status: 200
+body:
+
+{
+  "data": {
+    "type": "image",
+    "id": null,
+    "attributes": {
+      "image": {
+        "location": "denver,co",
+        "image_url": "https://pixabay.com/get/54e6d4444f50a814f1dc8460962930761c38d6ed534c704c7c2878dd954dc451_640.jpg",
+        "credit": {
+          "source": "pixabay.com",
+          "author": "quinntheislander",
+          "logo": "https://pixabay.com/static/img/logo_square.png"
+        }
+      }
+    }
+  }
+}
+```
   
 ### POST /api/v1/users
 
-Creates a user in BE database and returns user's email and a unique API key
+Creates a user in BE database and returns user's email and a unique API key. Parameters should be sent as a JSON payload in the body of the request for this response.
+
+#### Sample Request
+
+```
+POST /api/v1/users
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "whatever@example.com",
+  "password": "password",
+  "password_confirmation": "password"
+}
+```
+
+#### Sample Response
+
+```
+status: 201
+body:
+
+{
+  "data": {
+    "type": "users",
+    "id": "1",
+    "attributes": {
+      "email": "whatever@example.com",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+  }
+}
+```
 
 ### POST /api/v1/sessions
 
-Returns user's API key if email/password is valid
+Returns user's API key if email/password is valid. Parameters should be sent as a JSON payload in the body of the request for this response.
+
+#### Sample Request
+
+```
+POST /api/v1/sessions
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "whatever@example.com",
+  "password": "password"
+}
+```
+
+#### Sample Response
+
+```
+status: 200
+body:
+
+{
+  "data": {
+    "type": "users",
+    "id": "1",
+    "attributes": {
+      "email": "whatever@example.com",
+      "api_key": "jgn983hy48thw9begh98h4539h4"
+    }
+  }
+}
+```
 
 ### POST /api/v1/road_trip
 
-Returns travel time and weather at destination for queried trip
+Returns travel time and weather at destination for queried trip. Parameters should be sent as a JSON payload in the body of the request for this response.
 
-To see an example response like that below you can use [Postman](https://www.postman.com/) to send a GET request to our BE hosted on Heroku here: https://gtfo-be.herokuapp.com/api/v1/search
+#### Sample Request
 
-Required parameters:
-
-`:departure_airport` - (string) - the IATA code of the origin airport
-
-`:departure_date` - (string) - %d/%m/%y - the earliest date considered for departing flight
-
-`:trip_duration` - (integer) - the number of days planned for the round trip
-
-`:limit` - (integer) - the maximum number of results to be returned (default is currently 20 fo the index page)
-
-Sample view of an API call in Postman:
-![trips_call](https://user-images.githubusercontent.com/7945439/104528708-391c3400-55c5-11eb-807d-b95c37e0a4ae.png)
-
-
-This is an example of an error response for Invalid Data (Missing/Incorrect)
 ```
+POST /api/v1/road_trip
+Content-Type: application/json
+Accept: application/json
+
+body:
+
 {
-"error": "Invalid Data",
-"status": 400
+  "origin": "Denver,CO",
+  "destination": "Pueblo,CO",
+  "api_key": "jgn983hy48thw9begh98h4539h4"
+}
+```
+
+#### Sample Response
+
+```{
+  "data": {
+    "id": null,
+    "type": "roadtrip",
+    "attributes": {
+      "start_city": "Denver, CO",
+      "end_city": "Estes Park, CO",
+      "travel_time": "2 hours, 13 minutes"
+      "weather_at_eta": {
+        "temperature": 59.4,
+        "conditions": "partly cloudy with a chance of meatballs"
+      }
+    }
+  }
 }
 ```
 
