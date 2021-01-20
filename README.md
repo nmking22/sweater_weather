@@ -245,10 +245,7 @@ body:
 
 ## Schema
 
- <p align="center">
- <img src="https://i.imgur.com/OW5QQGw.png">
-  </p>
-
+<img width="472" alt="Screen Shot 2021-01-19 at 6 57 36 PM" src="https://user-images.githubusercontent.com/68172332/105116592-4a16ea80-5a88-11eb-9c42-64efec5e78f4.png">
 
 ## Dependencies
 
