@@ -6,7 +6,7 @@ class RoadTrip
               :id
 
   def initialize(time, start_city, end_city, weather_at_eta)
-    @id = 'null'
+    @id = nil
     @start_city = format_city(start_city)
     @end_city = format_city(end_city)
     @travel_time = convert_time(time)

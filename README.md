@@ -49,7 +49,7 @@ Unsplash API keys are available [here](https://unsplash.com/documentation#creati
 ## API Contract
 
 ### GET /api/v1/forecast?location={location}
-  
+
 Returns current weather forecast, hourly forecast for the next 8 hours and daily forecast for the next 5 days at queried location
 
 #### Sample Request
@@ -94,9 +94,9 @@ Accept: application/json
   }
 }
 ```
-  
+
 ### GET /api/v1/backgrounds?location={location}
-  
+
 Returns a relevant image for the queried location
 
 #### Sample Request
@@ -130,7 +130,7 @@ body:
   }
 }
 ```
-  
+
 ### POST /api/v1/users
 
 Creates a user in BE database and returns user's email and a unique API key. Parameters should be sent as a JSON payload in the body of the request for this response.
