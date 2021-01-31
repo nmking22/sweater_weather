@@ -4,6 +4,7 @@
 ![](https://img.shields.io/badge/Ruby-2.5.3-orange)
 ![](https://img.shields.io/gem/v/fast_jsonapi)
 ![](https://img.shields.io/github/issues/sweater_weather)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a36124a1078e5951e986/maintainability)](https://codeclimate.com/github/nmking22/sweater_weather/maintainability)
 
 # Sweater Weather
 ![Sweater Weather](https://user-images.githubusercontent.com/68172332/105113035-619ea500-5a81-11eb-904a-64ecfa505229.png)
