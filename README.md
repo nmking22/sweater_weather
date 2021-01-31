@@ -18,7 +18,6 @@
   - [Learning Goals](#learning-goals)
   - [Licenses](#licenses)
   - [Contact](#contact)
-  - [Acknowledgments](#acknowledgments)
 
 ## What it does
 
@@ -50,7 +49,7 @@ Unsplash API keys are available [here](https://unsplash.com/documentation#creati
 ## API Contract
 
 ### GET /api/v1/forecast?location={location}
-  
+
 Returns current weather forecast, hourly forecast for the next 8 hours and daily forecast for the next 5 days at queried location
 
 #### Sample Request
@@ -66,7 +65,7 @@ Accept: application/json
 ```
 {
   "data": {
-    "id": 'null',
+    "id": null,
     "type": "forecast",
     "attributes": {
       "current_weather": {
@@ -95,9 +94,9 @@ Accept: application/json
   }
 }
 ```
-  
+
 ### GET /api/v1/backgrounds?location={location}
-  
+
 Returns a relevant image for the queried location
 
 #### Sample Request
@@ -121,18 +120,17 @@ body:
     "attributes": {
       "image": {
         "location": "denver,co",
-        "image_url": "https://pixabay.com/get/54e6d4444f50a814f1dc8460962930761c38d6ed534c704c7c2878dd954dc451_640.jpg",
+        "image_url": "https://images.unsplash.com/photo-1600041161228-519e6dd27bac?crop=entropy&cs=srgb&fm=jpg&ixid=MXwxOTkxNzd8MHwxfHNlYXJjaHwxfHxkZW52ZXIsY298ZW58MHx8fA&ixlib=rb-1.2.1&q=85",
         "credit": {
-          "source": "pixabay.com",
-          "author": "quinntheislander",
-          "logo": "https://pixabay.com/static/img/logo_square.png"
+          "source": "Unsplash",
+          "author": "Michael Kilcoyne",
         }
       }
     }
   }
 }
 ```
-  
+
 ### POST /api/v1/users
 
 Creates a user in BE database and returns user's email and a unique API key. Parameters should be sent as a JSON payload in the body of the request for this response.
@@ -245,6 +243,8 @@ body:
 
 ## Schema
 
+Sweater Weather only uses one database table - users - to create and validate user information.
+
 <img width="472" alt="Screen Shot 2021-01-19 at 6 57 36 PM" src="https://user-images.githubusercontent.com/68172332/105116592-4a16ea80-5a88-11eb-9c42-64efec5e78f4.png">
 
 ## Dependencies
@@ -257,29 +257,17 @@ body:
 
 ## Testing
 
-* For testing our team implemented Travis CI with RSpec
+Sweater Weather uses RSpec for testing, and SimpleCov for test coverage. Sweater Weather features extensive sad path and edge case testing, and passes SimpleCov with 100% coverage. To run the test suite, run `bundle exec rspec` in the root sweater_weather directory.
 
-> Travis CI is cloud based and when we submit a pull request, Travis will attempt to build our project and run the tests to ensure everything is working as expected.
-
-> RSpec is a tool for unit testing that will ensure we have the intended functionality at each level of our code.
-
-* In order to run the tests, run `bundle exec rspec` in the command line and you should have all passing tests.
+<img width="1425" alt="Screen Shot 2021-01-19 at 7 03 19 PM" src="https://user-images.githubusercontent.com/68172332/105117032-083a7400-5a89-11eb-9ac8-bce26d348557.png">
 
 ## Learning Goals
 
-  * Consume two external APIs
-
-  * Build API's that return JSON responses
-
-  * Refactor code for better code for improved organization/readability
-
-  * Practice project management with project boards/daily standups/group retros
-
-  * Utilize workflow: small commits, descriptive pull requests and code review
-
-  * Write thorough and understandable documentation
-
-  * Utilize a Service-Oriented Architecture with a front-end, a back-end, and at least one micro-service
+* Expose an API that aggregates data from multiple external APIs
+* Expose an API that requires an authentication token
+* Expose an API for CRUD functionality
+* Determine completion criteria based on the needs of other developers
+* Research, select, and consume an API based on your needs as a developer
 
 ## Licenses
 
@@ -288,34 +276,4 @@ body:
 
 ## Contact
 
-#### Nick King: [![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/nick-king-3128501ba/), [Email](mailto:nickmaxking@gmail.com), [GitHub](https://github.com/nmking22)
-
-## Acknowledgments
-
-Thank you to Ian Douglas and Dione Wilson for being such amazing instructors and guiding us through this project!
-
-<!-- MARKDOWN LINKS -->
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+#### Nick King: [LinkedIn](https://www.linkedin.com/in/nick-king-3128501ba/), [Email](mailto:nickmaxking@gmail.com), [GitHub](https://github.com/nmking22)

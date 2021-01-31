@@ -13,7 +13,7 @@ describe 'image' do
     location = 'new orleans,la'
     image = Image.new(data, location)
 
-    expect(image.id).to eq('null')
+    expect(image.id).to eq(nil)
     expect(image.image).to be_a(Hash)
     expect(image.image).to have_key(:location)
     expect(image.image[:location]).to eq('new orleans,la')

@@ -5,7 +5,7 @@ class Forecast
               :hourly_weather
 
   def initialize(weather)
-    @id = 'null'
+    @id = nil
     @current_weather = weather[:current_weather]
     @daily_weather = weather[:daily_weather]
     @hourly_weather = weather[:hourly_weather]
